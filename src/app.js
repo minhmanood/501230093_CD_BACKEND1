@@ -19,8 +19,8 @@ app.get("/forms", (req, res) => {
 app.get("/icons", (req, res) => {
   res.render("pages/icons",{title: "Icons"});
 });
-app.get("/notification", (req, res) => {
-  res.render("pages/notification",{title:"Notification"});
+app.get("/notifications", (req, res) => {
+  res.render("pages/notifications",{title:"Notification"});
 });
 app.get("/tables", (req, res) => {
   res.render("pages/tables", { title: "tables" });
