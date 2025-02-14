@@ -2,12 +2,11 @@
     <div class="container-fluid">
         <div class="flex row justify-content-between m-2">
             <h4 class="page-title">Danh sách sản phẩm</h4>
-            <a href="/categories/create" class="btn btn-default" >Tạo sản phẩm </a>
+            <a href="/categories/create" class="btn btn-default">Tạo sản phẩm </a>
         </div>
         <% if (categories && categories.length>0 ) {%>
-            <div class="card">
-            
-                <div class="card-body">
+            <div class="card ">
+                <div class="card-body ">
                     <table class="table table-head-bg-success">
                         <thead>
                             <tr>
@@ -34,26 +33,83 @@
                                         <%= category.name%>
                                     </td>
                                     <td>
-                                        <a href="/categories/update/<%=category._id%>" class="btn btn-primary btn-sm">cập nhật sản
+                                        <a href="/categories/update/<%=category._id%>"
+                                            class="btn btn-primary btn-sm">cập nhật sản
                                             phẩm </a>
-                                        <a href="/categories/delete/<%=category._id%>" class="btn btn-danger btn-sm">Xóa sản phẩm
+                                        <a href="/categories/delete/<%=category._id%>" class="btn btn-danger btn-sm">Xóa
+                                            sản phẩm
                                         </a>
                                     </td>
-            
-            
+
+
                                 </tr>
                                 <% }) %>
-            
-            
-            
+
+
+
                         </tbody>
                     </table>
-            
                 </div>
+                <div class="card-body flex justify-content-center item-center ">
+                    <div class="form-group flex justify-content-center item-center">
+                        <label for="defaultSelect " class="white-space">Page Size</label>
+                        <select class="form-control " id="defaultSelect" onchange="changePageSize(event)">
+                            <% [5,10,20,30,50].forEach(function(pageSizeOption,index){ %>
+                                <%if(pageSizeOption=== pageSize){ %>
+                                    <option selected>
+                                        <%=pageSizeOption%>
+                                    </option>
+
+                                    <%}%>
+                                        <%if(pageSizeOption!== pageSize){ %>
+                                            <option>
+                                                <%=pageSizeOption%>
+                                            </option>
+
+                                            <%}%>
+                                                <% }) %>
+
+                        </select>
+                    </div>
+                    <ul class="pagination pg-primary">
+                        <li class="page-item">
+                            <a class="page-link"  aria-label="Previous" onclick="prePage()">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <% for(let i=1;i<=countPagination;i++){ %>
+                            <%if(page===i){ %>
+                                <li class="page-item active "><a class="page-link" href="#"
+                                        onclick="changePage(`<%=i%>`)">
+                                        <%=i%>
+                                    </a></li>
+                                <%}%>
+                                    <%if(page!==i){ %>
+                                        <li class="page-item "><a class="page-link" href="#"
+                                                onclick="changePage(`<%=i%>`)">
+                                                <%=i%>
+                                            </a></li>
+                                        <%}%>
+
+                                            <% } %>
+                                                <li class="page-item">
+                                                    <a class="page-link" aria-label="Next" onclick="nextPage()">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </li>
+                    </ul>
+
+
+
+
+                </div>
+
+
+                <%} else {%>
+                    <h4>Hiện tại chưa có sản phẩm nào </h4>
+                    <%}%>
+
             </div>
-            <%} else {%>
-                <h4>Hiện tại chưa có sản phẩm nào </h4>
-                <%}%>
-        
     </div>
-</div>
