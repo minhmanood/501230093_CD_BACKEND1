@@ -11,7 +11,7 @@
         })
         queryString.push("page=" + page)
         let url = "/categories?" + queryString.join("&&")
-        console.log("url", url);
+
 
         window.location.href = url
 
@@ -80,6 +80,22 @@
 
         })
         queryString.push("page=" + prePage)
+        let url = "/categories?" + queryString.join("&&")
+        window.location.href = url
+    }
+    function changeSort(event) {
+        const value = event.target.value
+      
+        
+        let urlParams = new URLSearchParams(window.location.search)
+        let page = urlParams.get("sort")
+        let queryString = []
+        urlParams.forEach((value, key) => {
+            if (key !== "sort") {
+                queryString.push(`${key}=${value}`)
+            }
+        })
+        queryString.push("sort=" + value)
         let url = "/categories?" + queryString.join("&&")
         window.location.href = url
     }

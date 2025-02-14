@@ -1,12 +1,19 @@
 import CategoryModel from "../models/categoryModel.js";
 import { ObjectId } from "mongodb";
+
 import { removeVietnameseAccents } from "../common/index.js";
 export async function listCategory(req, res) {
   const search = req.query?.search;
   const pageSize = !!req.query.pageSize ? parseInt(req.query.pageSize) : 5;
   const page = !!req.query.page ? parseInt(req.query.page) : 1;
   const skip = (page - 1) * pageSize;
-
+  const sort = !!req.query.sort ? req.query.sort : null;
+  const sortObject = [
+    { code: "name_ASC", name: "Tên tăng dần" },
+    { code: "name_DESC", name: "Tên giảm dần" },
+    { code: "code_ASC", name: "Mã tăng dần " },
+    { code: "code_DESC", name: "Mã giảm dần " },
+  ];
   let filters = {
     deletedAt: null,
   };
@@ -18,15 +25,18 @@ export async function listCategory(req, res) {
   }
   try {
     const countCategories = await CategoryModel.countDocuments(filters);
-    const categories = await CategoryModel.find(filters).skip(skip).limit(pageSize);
-    console.log({page});
-    
+    const categories = await CategoryModel.find(filters)
+      .skip(skip)
+      .limit(pageSize);
+
     res.render("pages/categories/list", {
       title: "Categories",
       categories: categories,
-      countPagination:Math.ceil(countCategories/pageSize),
+      countPagination: Math.ceil(countCategories / pageSize),
       pageSize,
-      page
+      page,
+      sort,
+      sortObject,
     });
   } catch (error) {
     console.log(error);

@@ -123,3 +123,18 @@
 .justify-content-center {
 	justify-content: center;
 }
+.max-w-20{
+	max-width: 20rem;
+}
+.mb-5{
+	margin-bottom: 5rem;
+}
+.mb-4px{
+	margin-bottom: 0.5rem;
+}
+.mr-1{
+	margin-right:1rem ;
+}
+.mb-1 {
+	margin-bottom: 1rem;
+}
