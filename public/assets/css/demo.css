@@ -138,3 +138,11 @@
 .mb-1 {
 	margin-bottom: 1rem;
 }
+.has-error .form-control {
+	border-color: #ff646d;
+	color: #ff646d;
+}
+
+.has-feedback {
+	position: relative;
+}
